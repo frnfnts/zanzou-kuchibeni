@@ -10,12 +10,14 @@ export const useInterval = (callback: () => void, interval: number) => {
   }, [callback, interval])
 
   const stopInterval = useCallback(() => {
-    intervalRef.current && clearInterval(intervalRef.current);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
   }, [])
 
   useEffect(() => {
-    return () => {
-      intervalRef.current && clearInterval(intervalRef.current);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
     }
   }, [])
 
