@@ -1,11 +1,19 @@
+#root {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    width: 100vw;
     background-color: #555;
     flex-direction: row-reverse;
+    flex: 1;
+    padding: 1rem;
 }
 
 .row {
@@ -13,19 +21,28 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 50%;
+    width: 100%;
+    row-gap: 1rem;
 }
 
 .letter {
+    display: flex;
     font-size: 2rem;
-    margin: 0.5rem;
-    padding: 0.5rem;
+    padding: 0.3rem;
     border-radius: 5px;
     cursor: pointer;
     background-color: #ccc;
     color: #000;
+    flex: 1;
 }
 
 .letter:not(.available) {
     background-color: #777;
+}
+
+.timer {
+    font-size: 2rem;
+    background-color: #ccc;
+    text-align: center;
+    color: #000;
 }
