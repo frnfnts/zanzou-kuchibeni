@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import './App.css'
 import { useInterval } from './useInterval'
 
@@ -17,6 +17,8 @@ const ALPHABET = [
 
 function App() {
   const [availableLetters, setAvailableLetters] = useState(new Set(ALPHABET.join('')))
+  const [time, setTime] = useState(0)
+
   const removeRandomLetter = useCallback(() => {
     setAvailableLetters((prev) => {
       const next = new Set(prev)
@@ -34,14 +36,35 @@ function App() {
     })
   }, [])
 
-  const { startInterval, stopInterval } = useInterval(removeRandomLetter, 1000)
+  const { startInterval, stopInterval } = useInterval(removeRandomLetter, 2000)
+  const { startInterval: startTimer, stopInterval: stopTimer } = useInterval(() => {
+    setTime((prev) => prev + 1)
+  }, 1000)
+
+  const start = useCallback(() => {
+    startInterval()
+    startTimer()
+  }, [startInterval, startTimer])
+
+  const stop = useCallback(() => {
+    stopInterval()
+    stopTimer()
+  }, [stopInterval, stopTimer])
 
   const reset = useCallback(() => {
     setAvailableLetters(new Set(ALPHABET.join('')))
-    stopInterval()
-  }, [stopInterval])
+    stop()
+    setTime(0)
+  }, [setAvailableLetters, stop])
+
+  const timeString = useMemo(() => (
+    `${Math.floor(time / 60).toString().padStart(2, '0')}:${(time % 60).toString().padStart(2, '0')}`
+  ), [time])
 
   return (<>
+    <div className="timer">
+      {timeString}
+    </div>
     <div className="wrapper">
       {ALPHABET.map((row, rowIndex) => (
         <div key={rowIndex} className="row">
@@ -68,8 +91,8 @@ function App() {
       ))}
     </div>
     <div className="controller">
-      <button onClick={startInterval}>Start</button>
-      <button onClick={stopInterval}>Stop</button>
+      <button onClick={start}>Start</button>
+      <button onClick={stop}>Stop</button>
       <button onClick={reset}>Reset</button>
     </div>
   </>)
