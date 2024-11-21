@@ -36,6 +36,11 @@ function App() {
 
   const { startInterval, stopInterval } = useInterval(removeRandomLetter, 1000)
 
+  const reset = useCallback(() => {
+    setAvailableLetters(new Set(ALPHABET.join('')))
+    stopInterval()
+  }, [stopInterval])
+
   return (<>
     <div className="wrapper">
       {ALPHABET.map((row, rowIndex) => (
@@ -65,6 +70,7 @@ function App() {
     <div className="controller">
       <button onClick={startInterval}>Start</button>
       <button onClick={stopInterval}>Stop</button>
+      <button onClick={reset}>Reset</button>
     </div>
   </>)
 }
