@@ -26,6 +26,6 @@
     color: #000;
 }
 
-.disappeared {
+.letter:not(.available) {
     background-color: #777;
 }
