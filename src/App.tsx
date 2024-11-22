@@ -36,7 +36,7 @@ function App() {
     })
   }, [])
 
-  const { startInterval, stopInterval } = useInterval(removeRandomLetter, 2000)
+  const { startInterval, stopInterval } = useInterval(removeRandomLetter, 60 * 1000)
   const { startInterval: startTimer, stopInterval: stopTimer } = useInterval(() => {
     setTime((prev) => prev + 1)
   }, 1000)
