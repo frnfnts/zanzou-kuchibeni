@@ -12,7 +12,7 @@ const ALPHABET = [
   "まみむめも",
   "やゆよ",
   "らりるれろ",
-  "わをん"
+  "わんー"
 ]
 
 function App() {
