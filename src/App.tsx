@@ -97,6 +97,7 @@ function App() {
       <button onClick={start}>Start</button>
       <button onClick={stop}>Stop</button>
       <button onClick={reset}>Reset</button>
+      <button onClick={removeRandomLetter}>Remove Random</button>
     </div>
   </>)
 }
