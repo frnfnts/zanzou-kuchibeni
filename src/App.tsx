@@ -42,6 +42,9 @@ function App() {
   }, 1000)
 
   const start = useCallback(() => {
+    if (availableLetters.size === ALPHABET.join('').length) {
+      removeRandomLetter()
+    }
     startInterval()
     startTimer()
   }, [startInterval, startTimer])
